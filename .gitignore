@@ -19,6 +19,17 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# typescript
+*.tsbuildinfo
+
+# testing
+/coverage
+
+# next.js
+frontend/.next/
+frontend/out/
+
+next-env.d.ts
 # IDE specific
 ##############
 .vscode/
