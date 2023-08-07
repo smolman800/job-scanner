@@ -10,7 +10,7 @@ multiple sites in one place instead of having to browse through multiple website
 ### Development Setup
 
 #### Prerequisites
-- [Python](https://github.com/pyenv/pyenv)
+- [Python](https://github.com/pyenv/pyenv)3.11.1 or later
 - Create a local copy of this Git repository (clone)
 
 #### Setup
@@ -20,3 +20,16 @@ multiple sites in one place instead of having to browse through multiple website
 
 #### Test
 - Run `pytest`
+
+
+## Frontend
+
+### Development Setup
+
+#### Prerequisites
+- [Node](https://nodejs.org/en) 18.14.2 or later
+
+#### Setup
+- Run `npm --prefix frontend/ install`
+- Run `npm run --prefix frontend/ dev`
+- Open http://localhost:3000
