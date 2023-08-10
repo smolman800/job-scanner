@@ -10,16 +10,15 @@ multiple sites in one place instead of having to browse through multiple website
 ### Development Setup
 
 #### Prerequisites
-- [Python](https://github.com/pyenv/pyenv)3.11.1 or later
-- Create a local copy of this Git repository (clone)
+- [Node](https://nodejs.org/en) 18.14.2 or later
 
 #### Setup
-- Run `pip install -r backend/requirements.txt`
-- Run `uvicorn backend.main:app --reload`
-- Open http://localhost:8000/health/
+- Run `npm --prefix backend/ install`
+- Run `npm run --prefix backend/ start:dev`
+- Open http://localhost:3000
 
 #### Test
-- Run `pytest`
+npm run --prefix backend/ test
 
 
 ## Frontend
