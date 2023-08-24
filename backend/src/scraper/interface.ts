@@ -1,9 +1,17 @@
-export type ScrapePostParam = {
-  from: Date;
-  to: Date;
-  postCount?: number;
-};
+export abstract class ListingConfig {
+  httpClientConfig: {
+    url: string;
+    method: string;
+    headers: object;
+    data: any;
+  };
+}
 
-export interface IScraper {
-  scrapePosts(params: ScrapePostParam): Promise<void>;
+export abstract class JobDetailsConfig {
+  httpClientConfig: {
+    url: string;
+    method: string;
+    headers: object;
+    data: any;
+  };
 }

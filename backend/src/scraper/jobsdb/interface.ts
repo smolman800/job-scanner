@@ -1,7 +1,7 @@
 // ------ Job Listing Interface ------
 
 export type JobListingAPIResponse = {
-  data: JobListingData[];
+  data: JobListingData;
 };
 
 type JobListingData = {
@@ -114,17 +114,17 @@ type Company = {
   advertiserId: string;
 };
 
-type JobDetail = {
+export type JobDetail = {
   summary: string[];
   jobDescription: JobDescription;
   jobRequirement: JobRequirement;
 };
 
-type JobDescription = {
+export type JobDescription = {
   html: string;
 };
 
-type JobRequirement = {
+export type JobRequirement = {
   careerLevel: string;
   yearsOfExperience: string;
   qualification: string;
