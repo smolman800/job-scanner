@@ -1,11 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn, Repository } from 'typeorm';
-import { Vendor } from '../entity/vendor.entity';
+import { Column, Entity, PrimaryColumn, Repository } from 'typeorm';
+import { Vendor, VendorId } from '../entity/vendor.entity';
 import { VendorRepository } from '../application/interface';
 
 @Entity('vendor')
 export class VendorOrmEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryColumn({ type: 'varchar', length: 255 })
+  id: VendorId;
 
   @Column()
   name: string;
@@ -34,7 +34,7 @@ export class VendorTypeOrmRepository implements VendorRepository {
     this.queryRunner.update(vendor.id, ormEntity);
   }
 
-  async get(id: string): Promise<Vendor> {
+  async get(id: VendorId): Promise<Vendor> {
     const ormEntity = await this.queryRunner.findOneOrFail({
       where: { id },
     });
@@ -45,7 +45,7 @@ export class VendorTypeOrmRepository implements VendorRepository {
     });
   }
 
-  async getMany(ids: string[]): Promise<Vendor[]> {
+  async getMany(ids: VendorId[]): Promise<Vendor[]> {
     const ormEntities = await this.queryRunner.find({
       where: ids.map((id) => ({ id })),
     });

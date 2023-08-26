@@ -1,8 +1,12 @@
 type VendorProps = {
-  id: string;
+  id: VendorId;
   name: string;
   url: string;
 };
+
+export enum VendorId {
+  JOBSDB = 'jobsdb',
+}
 
 export class Vendor {
   private props: VendorProps;
@@ -11,7 +15,7 @@ export class Vendor {
     this.props = props;
   }
 
-  static create(props: Omit<VendorProps, 'id'>, id: string): Vendor {
+  static create(props: Omit<VendorProps, 'id'>, id: VendorId): Vendor {
     return new Vendor({
       ...props,
       id,
