@@ -1,6 +1,8 @@
 import { Column, Entity, PrimaryColumn, Repository } from 'typeorm';
 import { Vendor, VendorId } from '../entity/vendor.entity';
 import { VendorRepository } from '../application/interface';
+import { Inject, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Entity('vendor')
 export class VendorOrmEntity {
@@ -14,9 +16,12 @@ export class VendorOrmEntity {
   url: string;
 }
 
+@Injectable()
 export class VendorTypeOrmRepository implements VendorRepository {
   constructor(
+    @InjectRepository(VendorOrmEntity)
     private readonly queryRunner: Repository<VendorOrmEntity>,
+    @Inject('Vendor')
     private readonly vendorEntity: typeof Vendor,
   ) {}
 

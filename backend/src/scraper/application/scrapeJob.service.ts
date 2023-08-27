@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { IdGenerator } from 'src/shared/idGenerator.service';
 import { JobPost } from '../entity/jobPost.entity';
 import { JobDetailDTO, JobPostRepository, Scraper } from './interface';
@@ -22,8 +22,9 @@ export class ScraperFactory {
 @Injectable()
 export class ScrapeJobUseCase {
   constructor(
-    private readonly repository: JobPostRepository,
+    private readonly jobPostRepository: JobPostRepository,
     private readonly idGenerator: IdGenerator,
+    @Inject('Vendor')
     private readonly jobPostEntity: typeof JobPost,
     private readonly scraperFactory: ScraperFactory,
   ) {}
@@ -55,6 +56,6 @@ export class ScrapeJobUseCase {
       });
     });
 
-    await this.repository.create(jobPostEntities);
+    await this.jobPostRepository.create(jobPostEntities);
   }
 }

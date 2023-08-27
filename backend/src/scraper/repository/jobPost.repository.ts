@@ -9,6 +9,8 @@ import {
 import { JobPost } from '../entity/jobPost.entity';
 import { VendorOrmEntity } from './vendor.repository';
 import { JobPostRepository } from '../application/interface';
+import { Inject, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Entity('job_post')
 export class JobPostOrmEntity {
@@ -56,9 +58,12 @@ export class JobPostOrmEntity {
   vendor: VendorOrmEntity;
 }
 
+@Injectable()
 export class JobPostTypeOrmRepository implements JobPostRepository {
   constructor(
+    @InjectRepository(JobPostOrmEntity)
     private readonly queryRunner: Repository<JobPostOrmEntity>,
+    @Inject('JobPost')
     private readonly jobPostEntity: typeof JobPost,
   ) {}
 
@@ -69,7 +74,7 @@ export class JobPostTypeOrmRepository implements JobPostRepository {
       Object.assign(ormEntity, serializedJobPost);
       return ormEntity;
     });
-    this.queryRunner.save(ormEntities);
+    await this.queryRunner.save(ormEntities);
   }
 
   async update(jobPost: JobPost[]): Promise<void> {

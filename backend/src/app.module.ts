@@ -4,10 +4,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ScraperModule } from './scraper/scraper.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { VendorOrmEntity } from './scraper/repository/vendor.repository';
+import { JobPostOrmEntity } from './scraper/repository/jobPost.repository';
 
 @Module({
   imports: [
-    ScraperModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -18,9 +19,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: config.get('DATABASE_USER'),
         password: config.get('DATABASE_PASSWORD'),
         database: config.get('DATABASE_NAME'),
+        entities: [VendorOrmEntity, JobPostOrmEntity],
         synchronize: false,
       }),
     }),
+    ScraperModule,
     ConfigModule.forRoot(),
   ],
   controllers: [AppController],
