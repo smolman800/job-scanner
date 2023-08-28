@@ -1,4 +1,4 @@
-type VendorProps = {
+export type VendorProps = {
   id: VendorId;
   name: string;
   url: string;
@@ -12,6 +12,8 @@ export class Vendor {
   private props: VendorProps;
 
   constructor(props: VendorProps) {
+    this.validateName(props.name);
+    this.validateUrl(props.url);
     this.props = props;
   }
 
@@ -24,6 +26,18 @@ export class Vendor {
 
   static hydrate(props: VendorProps): Vendor {
     return new Vendor(props);
+  }
+
+  private validateName(name: string): void {
+    if (name === '') {
+      throw new Error('name cannot be empty');
+    }
+  }
+
+  private validateUrl(url: string): void {
+    if (url === '') {
+      throw new Error('url cannot be empty');
+    }
   }
 
   serialize(): VendorProps {
