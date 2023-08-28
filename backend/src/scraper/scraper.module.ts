@@ -4,10 +4,14 @@ import {
   AxiosHttpClientService,
   HttpClient,
 } from 'src/shared/httpClient.service';
-import { JobPostRepository, VendorRepository } from './application/interface';
+import {
+  ScraperFactory,
+  JobPostRepository,
+  VendorRepository,
+} from './application/interface';
 import {
   ScrapeJobUseCase,
-  ScraperFactory,
+  ScraperFactoryImpl,
 } from './application/scrapeJob.service';
 import { JobPost } from './entity/jobPost.entity';
 import { Vendor } from './entity/vendor.entity';
@@ -50,7 +54,10 @@ const APPLICATION = [ScrapeJobUseCase];
 
 const SERVICE = [
   JobsdbScraperService,
-  ScraperFactory,
+  {
+    provide: ScraperFactory,
+    useClass: ScraperFactoryImpl,
+  },
   {
     provide: HttpClient,
     useClass: AxiosHttpClientService,

@@ -25,6 +25,10 @@ export abstract class Scraper {
   abstract scrapePosts(params: ScrapePostParam): Promise<JobDetailDTO[]>;
 }
 
+export abstract class ScraperFactory {
+  abstract create(vendor: Vendor): Scraper;
+}
+
 export abstract class VendorRepository {
   abstract create(vendor: Vendor): Promise<void>;
   abstract update(vendor: Vendor): Promise<void>;

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { JobDetailsConfig, ListingConfig } from 'src/scraper/interface';
-import { HttpClient } from 'src/shared/httpClient.service';
+import { JobDetailsConfig, ListingConfig } from '../../scraper/interface';
+import { HttpClient } from '../../shared/httpClient.service';
 import {
   JobDescription,
   JobDetail,

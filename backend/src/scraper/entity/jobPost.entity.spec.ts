@@ -1,23 +1,5 @@
-import { JobPost, JobPostProps } from './jobPost.entity';
-
-function createJobPostProps(overrides?: Partial<JobPostProps>): JobPostProps {
-  return {
-    id: 'id',
-    platformId: 'platformId',
-    pageUrl: 'pageUrl',
-    salaryMin: 10000,
-    salaryMax: 20000,
-    currency: 'THB',
-    jobTitle: 'jobTitle',
-    company: 'company',
-    postDate: '2023-08-27T17:58:07Z',
-    jobDescription: ['jobDescription'],
-    benefit: ['benefit'],
-    industry: 'industry',
-    vendorId: 'vendorId',
-    ...overrides,
-  };
-}
+import { createJobPostProps } from '../helper/test';
+import { JobPost } from './jobPost.entity';
 
 describe('JobPost', () => {
   test('create should return and instance of JobPost', () => {

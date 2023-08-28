@@ -1,11 +1,15 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { JobPost } from '../entity/jobPost.entity';
-import { JobDetailDTO, JobPostRepository, Scraper } from './interface';
+import {
+  ScraperFactory,
+  JobDetailDTO,
+  JobPostRepository,
+  Scraper,
+} from './interface';
 import { JobsdbScraperService } from '../jobsdb/jobsdb.service';
 import { Vendor, VendorId } from '../entity/vendor.entity';
-
 @Injectable()
-export class ScraperFactory {
+export class ScraperFactoryImpl implements ScraperFactory {
   constructor(private readonly jobsdbScraper: JobsdbScraperService) {}
 
   create(vendor: Vendor): Scraper {
