@@ -21,6 +21,8 @@ export type ScrapePostParam = {
   postCount?: number;
 };
 
+// TODO: add health check endpoint
+// TODO: add checker if the response schema hasn't changed
 export abstract class Scraper {
   abstract scrapePosts(params: ScrapePostParam): Promise<JobDetailDTO[]>;
 }

@@ -35,15 +35,13 @@ export class JobsdbScraperService implements Scraper {
     const results: JobDetailDTO[] = [];
     let pageNum = 1;
 
-    // TODO add tests for all possible breaking cases
     while (results.length < postCount) {
       const jobListings = await this.getListings(pageNum);
       if (jobListings.data.jobs.jobs.length === 0) {
-        // TODO: add logger.warning to indicate that there are no more jobs to scrape
         break;
       }
       const jobDetails = await this.getJobDetails(jobListings);
-      jobDetails.forEach((jobDetail) => {
+      for (const jobDetail of jobDetails) {
         const dataOfInterest = jobDetail.data.jobDetail;
         const jobPost: JobDetailDTO = {
           platformId: dataOfInterest.id,
@@ -60,7 +58,10 @@ export class JobsdbScraperService implements Scraper {
             dataOfInterest.jobDetail.jobRequirement.industryValue.label || '',
         };
         results.push(jobPost);
-      });
+        if (results.length >= postCount) {
+          break;
+        }
+      }
       pageNum += 1;
     }
     return results;

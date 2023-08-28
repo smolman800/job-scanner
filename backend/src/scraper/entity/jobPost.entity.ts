@@ -14,7 +14,6 @@ export type JobPostProps = {
   vendorId: string;
 };
 
-// TODO add tests if necessary
 export class JobPost {
   private props: JobPostProps;
   private acceptedCurrencies = ['THB'];

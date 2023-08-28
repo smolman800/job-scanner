@@ -1,3 +1,4 @@
+import { HttpClient } from 'src/shared/httpClient.service';
 import {
   JobDetailDTO,
   JobPostRepository,
@@ -58,5 +59,56 @@ export class MockedScraper implements Scraper {
 export class MockedScraperFactory implements ScraperFactory {
   create(): Scraper {
     return new MockedScraper();
+  }
+}
+
+export class MockedHttpClient implements HttpClient {
+  expectedResponse: any;
+
+  async get<T>(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    url: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    config?: any,
+  ): Promise<{ status: number; data: T }> {
+    return this.expectedResponse;
+  }
+
+  async post<T>(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    url: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    body?: object,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    config?: any,
+  ): Promise<{ status: number; data: T }> {
+    return this.expectedResponse;
+  }
+
+  async patch<T>(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    url: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    body?: object,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    config?: any,
+  ): Promise<{ status: number; data: T }> {
+    return this.expectedResponse;
+  }
+
+  async delete<T>(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    url: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    config?: any,
+  ): Promise<{ status: number; data: T }> {
+    return this.expectedResponse;
+  }
+
+  setResponse(expectedResponseContent: any, status: number): void {
+    this.expectedResponse = {
+      status,
+      data: expectedResponseContent,
+    };
   }
 }
