@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IdGenerator } from 'src/shared/idGenerator.service';
 import { JobPost } from '../entity/jobPost.entity';
 import { JobDetailDTO, JobPostRepository, Scraper } from './interface';
 import { JobsdbScraperService } from '../jobsdb/jobsdb.service';
@@ -23,7 +22,6 @@ export class ScraperFactory {
 export class ScrapeJobUseCase {
   constructor(
     private readonly jobPostRepository: JobPostRepository,
-    private readonly idGenerator: IdGenerator,
     @Inject('Vendor')
     private readonly jobPostEntity: typeof JobPost,
     private readonly scraperFactory: ScraperFactory,
@@ -38,7 +36,7 @@ export class ScrapeJobUseCase {
     });
 
     const jobPostEntities = jobDetails.map((jobDetail) => {
-      const id = this.idGenerator.generate();
+      const id = `${jobDetail.platformId}-${vendor.id}`;
       return this.jobPostEntity.hydrate({
         id,
         platformId: jobDetail.platformId,

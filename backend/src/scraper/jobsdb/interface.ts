@@ -72,17 +72,21 @@ type SalaryRange = {
 // ------ Job Details Interface ------
 
 export type JobDetailsAPIResponse = {
-  id: string;
-  pageUrl: string;
-  applyUrl: ApplyUrl;
-  isExpired: boolean;
-  accountNum: number;
-  advertisementId: string;
-  adType: string;
-  header: Header;
-  jobDetail: JobDetail;
-  location: DetailLocation[];
-  sourceCountry: string;
+  data: {
+    jobDetail: {
+      id: string;
+      pageUrl: string;
+      applyUrl: ApplyUrl;
+      isExpired: boolean;
+      accountNum: number;
+      advertisementId: string;
+      adType: string;
+      header: Header;
+      jobDetail: JobDetail;
+      location: DetailLocation[];
+      sourceCountry: string;
+    };
+  };
 };
 
 type ApplyUrl = {

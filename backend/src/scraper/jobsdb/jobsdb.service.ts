@@ -44,19 +44,20 @@ export class JobsdbScraperService implements Scraper {
       }
       const jobDetails = await this.getJobDetails(jobListings);
       jobDetails.forEach((jobDetail) => {
+        const dataOfInterest = jobDetail.data.jobDetail;
         const jobPost: JobDetailDTO = {
-          platformId: jobDetail.id,
-          pageUrl: jobDetail.pageUrl,
-          salaryMin: jobDetail.header.salary.min,
-          salaryMax: jobDetail.header.salary.max,
-          currency: jobDetail.header.salary.currency,
-          jobTitle: jobDetail.header.jobTitle,
-          company: jobDetail.header.company.name,
-          postDate: jobDetail.header.postedAt,
-          jobDescription: this.extractJobDescription(jobDetail.jobDetail),
-          benefit: jobDetail.jobDetail.jobRequirement.benefits,
+          platformId: dataOfInterest.id,
+          pageUrl: dataOfInterest.pageUrl,
+          salaryMin: dataOfInterest.header.salary.min,
+          salaryMax: dataOfInterest.header.salary.max,
+          currency: dataOfInterest.header.salary.currency,
+          jobTitle: dataOfInterest.header.jobTitle,
+          company: dataOfInterest.header.company.name,
+          postDate: dataOfInterest.header.postedAt,
+          jobDescription: this.extractJobDescription(dataOfInterest.jobDetail),
+          benefit: dataOfInterest.jobDetail.jobRequirement.benefits,
           industry:
-            jobDetail.jobDetail.jobRequirement.industryValue.label || '',
+            dataOfInterest.jobDetail.jobRequirement.industryValue.label || '',
         };
         results.push(jobPost);
       });

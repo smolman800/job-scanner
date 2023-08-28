@@ -4,10 +4,6 @@ import {
   AxiosHttpClientService,
   HttpClient,
 } from 'src/shared/httpClient.service';
-import {
-  IdGenerator,
-  UUIDGeneratorService,
-} from 'src/shared/idGenerator.service';
 import { JobPostRepository, VendorRepository } from './application/interface';
 import {
   ScrapeJobUseCase,
@@ -58,10 +54,6 @@ const SERVICE = [
   {
     provide: HttpClient,
     useClass: AxiosHttpClientService,
-  },
-  {
-    provide: IdGenerator,
-    useClass: UUIDGeneratorService,
   },
 ];
 

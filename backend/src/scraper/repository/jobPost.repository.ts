@@ -3,7 +3,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   Repository,
 } from 'typeorm';
 import { JobPost } from '../entity/jobPost.entity';
@@ -14,7 +14,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 @Entity('job_post')
 export class JobPostOrmEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn({ type: 'varchar', length: 255 })
   id: string;
 
   @Column({ nullable: true })
@@ -50,12 +50,9 @@ export class JobPostOrmEntity {
   @Column()
   industry: string;
 
-  @Column()
+  @ManyToOne(() => VendorOrmEntity, { eager: false, nullable: false })
+  @JoinColumn({ name: 'vendorId' })
   vendorId: string;
-
-  @ManyToOne(() => VendorOrmEntity)
-  @JoinColumn({ name: 'vendor_id' })
-  vendor: VendorOrmEntity;
 }
 
 @Injectable()
@@ -78,13 +75,7 @@ export class JobPostTypeOrmRepository implements JobPostRepository {
   }
 
   async update(jobPost: JobPost[]): Promise<void> {
-    const ormEntities = jobPost.map((jobPost) => {
-      const ormEntity = new JobPostOrmEntity();
-      const serializedJobPost = jobPost.serialize();
-      Object.assign(ormEntity, serializedJobPost);
-      return ormEntity;
-    });
-    this.queryRunner.save(ormEntities);
+    await this.create(jobPost);
   }
 
   async get(id: string): Promise<JobPost> {
