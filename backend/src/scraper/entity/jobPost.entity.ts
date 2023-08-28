@@ -1,4 +1,4 @@
-type JobPostProps = {
+export type JobPostProps = {
   id: string;
   platformId: string | null;
   pageUrl: string;
@@ -41,29 +41,29 @@ export class JobPost {
     salaryMin: JobPostProps['salaryMin'],
     salaryMax: JobPostProps['salaryMax'],
   ): void {
-    if (salaryMin && salaryMax) {
-      if (salaryMin > salaryMax) {
-        throw new Error('salaryMin must be less than salaryMax');
-      }
-    }
     if (salaryMin && salaryMin < 0) {
       throw new Error('salaryMin must be positive');
     }
     if (salaryMax && salaryMax < 0) {
       throw new Error('salaryMax must be positive');
     }
+    if (salaryMin && salaryMax) {
+      if (salaryMin > salaryMax) {
+        throw new Error('salaryMin must be less than salaryMax');
+      }
+    }
   }
 
-  private validateJobTitle(jobTitle: JobPostProps['jobTitle']): void {
+  private validateJobTitle(jobTitle: string): void {
     if (jobTitle === '') {
       throw new Error('jobTitle cannot be empty');
     }
   }
 
   private validateCurrency(
-    currency: JobPostProps['currency'],
-    salaryMin: JobPostProps['salaryMin'],
-    salaryMax: JobPostProps['salaryMax'],
+    currency: string | null,
+    salaryMin: number | null,
+    salaryMax: number | null,
   ): void {
     if (currency === null) {
       if (salaryMin || salaryMax) {
@@ -76,8 +76,7 @@ export class JobPost {
     }
   }
 
-  // TODO: add test for this
-  private validatePostDate(postDate: JobPostProps['postDate']): void {
+  private validatePostDate(postDate: string): void {
     const date = new Date(postDate);
     if (isNaN(date.getTime())) {
       throw new Error('postDate must be a valid date');
