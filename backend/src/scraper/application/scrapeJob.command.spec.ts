@@ -10,10 +10,16 @@ describe('ScrapeJobUseCase', () => {
   test('execute should save jobPosts to repository', async () => {
     const jobPostRepository = new InMemoryJobPostRepository();
     const scraperFactory = new MockedScraperFactory();
+    const publisher = {
+      mergeObjectContext: jest.fn().mockReturnValue({
+        commit: jest.fn(),
+      }),
+    } as any;
     const useCase = new ScrapeJobHandler(
       jobPostRepository,
       JobPost,
       scraperFactory,
+      publisher,
     );
     const vendor = Vendor.hydrate({
       id: VendorId.JOBSDB,

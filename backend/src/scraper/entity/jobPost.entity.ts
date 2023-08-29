@@ -16,6 +16,10 @@ export type JobPostProps = {
   vendorId: string;
 };
 
+export class JobPostCreatedEvent {
+  constructor(public readonly jobPost: JobPost) {}
+}
+
 export class JobPost extends AggregateRoot {
   private props: JobPostProps;
   private acceptedCurrencies = ['THB'];
@@ -29,10 +33,12 @@ export class JobPost extends AggregateRoot {
   }
 
   static create(props: Omit<JobPostProps, 'id'>, id: string): JobPost {
-    return new JobPost({
+    const jobPost = new JobPost({
       ...props,
       id,
     });
+    jobPost.apply(new JobPostCreatedEvent(jobPost));
+    return jobPost;
   }
 
   static hydrate(props: JobPostProps): JobPost {

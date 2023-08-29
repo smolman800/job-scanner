@@ -8,7 +8,7 @@ import {
 } from './interface';
 import { JobsdbScraperService } from '../jobsdb/jobsdb.service';
 import { Vendor, VendorId } from '../entity/vendor.entity';
-import { CommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class ScraperFactoryImpl implements ScraperFactory {
@@ -35,6 +35,7 @@ export class ScrapeJobHandler {
     @Inject('Vendor')
     private readonly jobPostEntity: typeof JobPost,
     private readonly scraperFactory: ScraperFactory,
+    private readonly publisher: EventPublisher,
   ) {}
 
   async execute({ vendor }: ScrapeJobCommand) {
@@ -65,5 +66,8 @@ export class ScrapeJobHandler {
     });
 
     await this.jobPostRepository.create(jobPostEntities);
+    jobPostEntities.forEach((jobPost) => {
+      this.publisher.mergeObjectContext(jobPost).commit();
+    });
   }
 }
