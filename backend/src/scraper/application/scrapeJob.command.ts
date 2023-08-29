@@ -32,7 +32,7 @@ export class ScrapeJobCommand {
 export class ScrapeJobHandler {
   constructor(
     private readonly jobPostRepository: JobPostRepository,
-    @Inject('Vendor')
+    @Inject('JobPost')
     private readonly jobPostEntity: typeof JobPost,
     private readonly scraperFactory: ScraperFactory,
     private readonly publisher: EventPublisher,
@@ -48,26 +48,30 @@ export class ScrapeJobHandler {
 
     const jobPostEntities = jobDetails.map((jobDetail) => {
       const id = `${jobDetail.platformId}-${vendor.id}`;
-      return this.jobPostEntity.hydrate({
+      const post = this.jobPostEntity.create(
+        {
+          platformId: jobDetail.platformId,
+          pageUrl: jobDetail.pageUrl,
+          salaryMin: jobDetail.salaryMin,
+          salaryMax: jobDetail.salaryMax,
+          currency: jobDetail.currency,
+          jobTitle: jobDetail.jobTitle,
+          company: jobDetail.company,
+          postDate: jobDetail.postDate,
+          jobDescription: jobDetail.jobDescription,
+          benefit: jobDetail.benefit,
+          industry: jobDetail.industry,
+          vendorId: vendor.id,
+        },
         id,
-        platformId: jobDetail.platformId,
-        pageUrl: jobDetail.pageUrl,
-        salaryMin: jobDetail.salaryMin,
-        salaryMax: jobDetail.salaryMax,
-        currency: jobDetail.currency,
-        jobTitle: jobDetail.jobTitle,
-        company: jobDetail.company,
-        postDate: jobDetail.postDate,
-        jobDescription: jobDetail.jobDescription,
-        benefit: jobDetail.benefit,
-        industry: jobDetail.industry,
-        vendorId: vendor.id,
-      });
+      );
+      return post;
     });
 
     await this.jobPostRepository.create(jobPostEntities);
     jobPostEntities.forEach((jobPost) => {
-      this.publisher.mergeObjectContext(jobPost).commit();
+      this.publisher.mergeObjectContext(jobPost);
+      jobPost.commit();
     });
   }
 }

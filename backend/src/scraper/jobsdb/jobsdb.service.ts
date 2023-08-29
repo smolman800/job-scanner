@@ -46,8 +46,12 @@ export class JobsdbScraperService implements Scraper {
         const jobPost: JobDetailDTO = {
           platformId: dataOfInterest.id,
           pageUrl: dataOfInterest.pageUrl,
-          salaryMin: dataOfInterest.header.salary.min,
-          salaryMax: dataOfInterest.header.salary.max,
+          salaryMin: dataOfInterest.header.salary.min
+            ? parseInt(dataOfInterest.header.salary.min)
+            : null,
+          salaryMax: dataOfInterest.header.salary.max
+            ? parseInt(dataOfInterest.header.salary.max)
+            : null,
           currency: dataOfInterest.header.salary.currency,
           jobTitle: dataOfInterest.header.jobTitle,
           company: dataOfInterest.header.company.name,

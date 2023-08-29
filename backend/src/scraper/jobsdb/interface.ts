@@ -105,8 +105,8 @@ type Header = {
 };
 
 type Salary = {
-  max: number | null;
-  min: number | null;
+  max: string | null;
+  min: string | null;
   type: string | null;
   currency: string | null;
 };
