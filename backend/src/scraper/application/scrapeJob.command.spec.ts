@@ -4,13 +4,13 @@ import {
   InMemoryJobPostRepository,
   MockedScraperFactory,
 } from '../helper/test';
-import { ScrapeJobUseCase } from './scrapeJob.service';
+import { ScrapeJobHandler } from './scrapeJob.command';
 
 describe('ScrapeJobUseCase', () => {
   test('execute should save jobPosts to repository', async () => {
     const jobPostRepository = new InMemoryJobPostRepository();
     const scraperFactory = new MockedScraperFactory();
-    const useCase = new ScrapeJobUseCase(
+    const useCase = new ScrapeJobHandler(
       jobPostRepository,
       JobPost,
       scraperFactory,
@@ -20,7 +20,7 @@ describe('ScrapeJobUseCase', () => {
       name: 'Jobsdb',
       url: 'https://th.jobsdb.com',
     });
-    await useCase.execute(vendor);
+    await useCase.execute({ vendor });
     expect(jobPostRepository.jobPosts.length).toBe(1);
     expect(jobPostRepository.jobPosts[0]).toEqual(
       JobPost.hydrate({

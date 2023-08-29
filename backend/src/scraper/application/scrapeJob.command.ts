@@ -8,6 +8,8 @@ import {
 } from './interface';
 import { JobsdbScraperService } from '../jobsdb/jobsdb.service';
 import { Vendor, VendorId } from '../entity/vendor.entity';
+import { CommandHandler } from '@nestjs/cqrs';
+
 @Injectable()
 export class ScraperFactoryImpl implements ScraperFactory {
   constructor(private readonly jobsdbScraper: JobsdbScraperService) {}
@@ -22,8 +24,12 @@ export class ScraperFactoryImpl implements ScraperFactory {
   }
 }
 
-@Injectable()
-export class ScrapeJobUseCase {
+export class ScrapeJobCommand {
+  constructor(public readonly vendor: Vendor) {}
+}
+
+@CommandHandler(ScrapeJobCommand)
+export class ScrapeJobHandler {
   constructor(
     private readonly jobPostRepository: JobPostRepository,
     @Inject('Vendor')
@@ -31,7 +37,7 @@ export class ScrapeJobUseCase {
     private readonly scraperFactory: ScraperFactory,
   ) {}
 
-  async execute(vendor: Vendor) {
+  async execute({ vendor }: ScrapeJobCommand) {
     const scraper = this.scraperFactory.create(vendor);
     const jobDetails: JobDetailDTO[] = await scraper.scrapePosts({
       from: null,

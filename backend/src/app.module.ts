@@ -6,9 +6,11 @@ import { ScraperModule } from './scraper/scraper.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { VendorOrmEntity } from './scraper/repository/vendor.repository';
 import { JobPostOrmEntity } from './scraper/repository/jobPost.repository';
+import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
   imports: [
+    CqrsModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

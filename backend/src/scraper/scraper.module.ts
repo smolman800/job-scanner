@@ -10,9 +10,9 @@ import {
   VendorRepository,
 } from './application/interface';
 import {
-  ScrapeJobUseCase,
+  ScrapeJobHandler,
   ScraperFactoryImpl,
-} from './application/scrapeJob.service';
+} from './application/scrapeJob.command';
 import { JobPost } from './entity/jobPost.entity';
 import { Vendor } from './entity/vendor.entity';
 import { JobDetailsConfig, ListingConfig } from './interface';
@@ -50,8 +50,6 @@ const REPOSITORY = [
   },
 ];
 
-const APPLICATION = [ScrapeJobUseCase];
-
 const SERVICE = [
   JobsdbScraperService,
   {
@@ -63,6 +61,8 @@ const SERVICE = [
     useClass: AxiosHttpClientService,
   },
 ];
+
+const HANDLER = [ScrapeJobHandler];
 
 const CONFIG = [
   {
@@ -79,6 +79,6 @@ const CONFIG = [
   imports: [TypeOrmModule.forFeature([VendorOrmEntity, JobPostOrmEntity])],
   controllers: [ScraperController],
   exports: [],
-  providers: [...ENTITY, ...REPOSITORY, ...APPLICATION, ...SERVICE, ...CONFIG],
+  providers: [...ENTITY, ...REPOSITORY, ...SERVICE, ...CONFIG, ...HANDLER],
 })
 export class ScraperModule {}
