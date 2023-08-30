@@ -3,9 +3,11 @@ import { Column, Entity, Index, PrimaryColumn, Repository } from 'typeorm';
 import {
   GetManyJobListingParam,
   JobListingRepository,
+  PaginateFormat,
 } from '../application/interface';
 import { InjectRepository } from '@nestjs/typeorm';
-import { JobListing } from '../entity/jobListing.entity';
+import { JobListing, JobListingProps } from '../entity/jobListing.entity';
+import { paginate, IPaginationOptions } from 'nestjs-typeorm-paginate';
 
 @Entity('job_listing')
 @Index('idx_postDate_jobTitle_vendorId', ['postDate', 'jobTitle', 'vendorId'])
@@ -95,6 +97,15 @@ export class JobListingTypeOrmRepository implements JobListingRepository {
       return ormEntity;
     });
     await this.repository.save(ormEntities);
+  }
+
+  async paginate(
+    option: IPaginationOptions,
+  ): Promise<PaginateFormat<JobListingProps>> {
+    const queryBuilder = this.repository.createQueryBuilder();
+    queryBuilder.orderBy('"postDate"', 'DESC');
+    const result = await paginate<JobListingOrmEntity>(queryBuilder, option);
+    return result;
   }
 
   private buildWhere(param: GetManyJobListingParam) {
