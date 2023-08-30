@@ -1,9 +1,9 @@
-import { JobPost } from '../entity/jobPost.entity';
-import { Vendor, VendorId } from '../entity/vendor.entity';
+import { JobPost } from '../../entity/jobPost.entity';
+import { Vendor, VendorId } from '../../entity/vendor.entity';
 import {
   InMemoryJobPostRepository,
   MockedScraperFactory,
-} from '../helper/test';
+} from '../../helper/test';
 import { ScrapeJobHandler } from './scrapeJob.command';
 
 describe('ScrapeJobUseCase', () => {

@@ -5,14 +5,14 @@ import {
   HttpClient,
 } from 'src/shared/httpClient.service';
 import {
-  ScraperFactory,
-  JobPostRepository,
-  VendorRepository,
-} from './application/interface';
-import {
   ScrapeJobHandler,
   ScraperFactoryImpl,
-} from './application/scrapeJob.command';
+} from './application/command/scrapeJob.command';
+import {
+  JobPostRepository,
+  ScraperFactory,
+  VendorRepository,
+} from './application/interface';
 import { JobPost } from './entity/jobPost.entity';
 import { Vendor } from './entity/vendor.entity';
 import { JobDetailsConfig, ListingConfig } from './interface';
@@ -27,6 +27,7 @@ import {
   VendorTypeOrmRepository,
 } from './repository/vendor.repository';
 import { ScraperController } from './scraper.controller';
+import { GetVendorHandler } from './application/query/getVendor.query';
 
 const ENTITY = [
   {
@@ -62,7 +63,7 @@ const SERVICE = [
   },
 ];
 
-const HANDLER = [ScrapeJobHandler];
+const HANDLER = [ScrapeJobHandler, GetVendorHandler];
 
 const CONFIG = [
   {
@@ -78,7 +79,6 @@ const CONFIG = [
 @Module({
   imports: [TypeOrmModule.forFeature([VendorOrmEntity, JobPostOrmEntity])],
   controllers: [ScraperController],
-  exports: [],
   providers: [...ENTITY, ...REPOSITORY, ...SERVICE, ...CONFIG, ...HANDLER],
 })
 export class ScraperModule {}

@@ -12,7 +12,7 @@ import {
 // TODO: abstract html parser and inject it into JobsdbScraperService
 import * as cheerio from 'cheerio';
 import {
-  JobDetailDTO,
+  JobDetailDto,
   ScrapePostParam,
   Scraper,
 } from '../application/interface';
@@ -30,9 +30,9 @@ export class JobsdbScraperService implements Scraper {
     from = new Date(),
     to = new Date(),
     postCount = 10,
-  }: ScrapePostParam): Promise<JobDetailDTO[]> {
+  }: ScrapePostParam): Promise<JobDetailDto[]> {
     this.validateParam({ from, to, postCount });
-    const results: JobDetailDTO[] = [];
+    const results: JobDetailDto[] = [];
     let pageNum = 1;
 
     while (results.length < postCount) {
@@ -43,7 +43,7 @@ export class JobsdbScraperService implements Scraper {
       const jobDetails = await this.getJobDetails(jobListings);
       for (const jobDetail of jobDetails) {
         const dataOfInterest = jobDetail.data.jobDetail;
-        const jobPost: JobDetailDTO = {
+        const jobPost: JobDetailDto = {
           platformId: dataOfInterest.id,
           pageUrl: dataOfInterest.pageUrl,
           salaryMin: dataOfInterest.header.salary.min

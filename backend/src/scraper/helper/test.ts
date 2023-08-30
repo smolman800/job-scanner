@@ -1,6 +1,6 @@
 import { HttpClient } from 'src/shared/httpClient.service';
 import {
-  JobDetailDTO,
+  JobDetailDto,
   JobPostRepository,
   Scraper,
   ScraperFactory,
@@ -49,7 +49,7 @@ export class InMemoryJobPostRepository implements JobPostRepository {
 }
 
 export class MockedScraper implements Scraper {
-  async scrapePosts(): Promise<JobDetailDTO[]> {
+  async scrapePosts(): Promise<JobDetailDto[]> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { id, vendorId, ...props } = createJobPostProps();
     return [{ ...props }];

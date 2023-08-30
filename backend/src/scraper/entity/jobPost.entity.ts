@@ -17,7 +17,7 @@ export type JobPostProps = {
 };
 
 export class JobPostCreatedEvent {
-  constructor(public readonly jobPost: JobPost) {}
+  constructor(public readonly jobPost: JobPostProps) {}
 }
 
 export class JobPost extends AggregateRoot {
@@ -37,7 +37,7 @@ export class JobPost extends AggregateRoot {
       ...props,
       id,
     });
-    jobPost.apply(new JobPostCreatedEvent(jobPost));
+    jobPost.apply(new JobPostCreatedEvent(jobPost.serialize()));
     return jobPost;
   }
 

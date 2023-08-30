@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { VendorRepository } from './application/interface';
-import { ScrapeJobCommand } from './application/scrapeJob.command';
+import { ScrapeJobCommand } from './application/command/scrapeJob.command';
 
 @Controller('scraper')
 export class ScraperController {

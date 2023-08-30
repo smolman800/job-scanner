@@ -1,13 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { JobPost } from '../entity/jobPost.entity';
+import { JobPost } from '../../entity/jobPost.entity';
 import {
   ScraperFactory,
-  JobDetailDTO,
+  JobDetailDto,
   JobPostRepository,
   Scraper,
-} from './interface';
-import { JobsdbScraperService } from '../jobsdb/jobsdb.service';
-import { Vendor, VendorId } from '../entity/vendor.entity';
+} from '../interface';
+import { JobsdbScraperService } from '../../jobsdb/jobsdb.service';
+import { Vendor, VendorId } from '../../entity/vendor.entity';
 import { CommandHandler, EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
@@ -40,7 +40,7 @@ export class ScrapeJobHandler {
 
   async execute({ vendor }: ScrapeJobCommand) {
     const scraper = this.scraperFactory.create(vendor);
-    const jobDetails: JobDetailDTO[] = await scraper.scrapePosts({
+    const jobDetails: JobDetailDto[] = await scraper.scrapePosts({
       from: null,
       to: null,
       postCount: 10,
