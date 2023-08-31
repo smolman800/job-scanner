@@ -1,5 +1,6 @@
 import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
+import { JobListingOrmEntity } from 'src/listing/repository/jobListing.repository';
 import { JobPostOrmEntity } from 'src/scraper/repository/jobPost.repository';
 import { VendorOrmEntity } from 'src/scraper/repository/vendor.repository';
 import { DataSource } from 'typeorm';
@@ -14,7 +15,7 @@ export default new DataSource({
   username: configService.get('DATABASE_USER'),
   password: configService.get('DATABASE_PASSWORD'),
   database: configService.get('DATABASE_NAME'),
-  entities: [VendorOrmEntity, JobPostOrmEntity],
+  entities: [VendorOrmEntity, JobPostOrmEntity, JobListingOrmEntity],
   migrations: ['migration/*.ts'],
   logging: true,
 });

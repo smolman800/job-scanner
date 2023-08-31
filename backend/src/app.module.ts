@@ -6,9 +6,13 @@ import { ScraperModule } from './scraper/scraper.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { VendorOrmEntity } from './scraper/repository/vendor.repository';
 import { JobPostOrmEntity } from './scraper/repository/jobPost.repository';
+import { CqrsModule } from '@nestjs/cqrs';
+import { ListingModule } from './listing/listing.module';
+import { JobListingOrmEntity } from './listing/repository/jobListing.repository';
 
 @Module({
   imports: [
+    CqrsModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -19,11 +23,12 @@ import { JobPostOrmEntity } from './scraper/repository/jobPost.repository';
         username: config.get('DATABASE_USER'),
         password: config.get('DATABASE_PASSWORD'),
         database: config.get('DATABASE_NAME'),
-        entities: [VendorOrmEntity, JobPostOrmEntity],
+        entities: [VendorOrmEntity, JobPostOrmEntity, JobListingOrmEntity],
         synchronize: false,
       }),
     }),
     ScraperModule,
+    ListingModule,
     ConfigModule.forRoot(),
   ],
   controllers: [AppController],

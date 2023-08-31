@@ -1,3 +1,5 @@
+import { AggregateRoot } from '@nestjs/cqrs';
+
 export type JobPostProps = {
   id: string;
   platformId: string | null;
@@ -14,10 +16,15 @@ export type JobPostProps = {
   vendorId: string;
 };
 
-export class JobPost {
+export class JobPostCreatedEvent {
+  constructor(public readonly jobPost: JobPostProps) {}
+}
+
+export class JobPost extends AggregateRoot {
   private props: JobPostProps;
   private acceptedCurrencies = ['THB'];
   constructor(props: JobPostProps) {
+    super();
     this.validateSalary(props.salaryMin, props.salaryMax);
     this.validateJobTitle(props.jobTitle);
     this.validateCurrency(props.currency, props.salaryMin, props.salaryMax);
@@ -26,10 +33,12 @@ export class JobPost {
   }
 
   static create(props: Omit<JobPostProps, 'id'>, id: string): JobPost {
-    return new JobPost({
+    const jobPost = new JobPost({
       ...props,
       id,
     });
+    jobPost.apply(new JobPostCreatedEvent(jobPost.serialize()));
+    return jobPost;
   }
 
   static hydrate(props: JobPostProps): JobPost {

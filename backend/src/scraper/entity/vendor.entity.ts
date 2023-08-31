@@ -1,3 +1,5 @@
+import { AggregateRoot } from '@nestjs/cqrs';
+
 export type VendorProps = {
   id: VendorId;
   name: string;
@@ -8,10 +10,11 @@ export enum VendorId {
   JOBSDB = 'jobsdb',
 }
 
-export class Vendor {
+export class Vendor extends AggregateRoot {
   private props: VendorProps;
 
   constructor(props: VendorProps) {
+    super();
     this.validateName(props.name);
     this.validateUrl(props.url);
     this.props = props;

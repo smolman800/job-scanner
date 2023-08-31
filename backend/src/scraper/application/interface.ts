@@ -1,7 +1,9 @@
 import { JobPost } from '../entity/jobPost.entity';
 import { Vendor } from '../entity/vendor.entity';
 
-export type JobDetailDTO = {
+// --- Command ---
+
+export type JobDetailDto = {
   platformId: string | null;
   pageUrl: string;
   salaryMin: number | null;
@@ -24,7 +26,7 @@ export type ScrapePostParam = {
 // TODO: add health check endpoint
 // TODO: add checker if the response schema hasn't changed
 export abstract class Scraper {
-  abstract scrapePosts(params: ScrapePostParam): Promise<JobDetailDTO[]>;
+  abstract scrapePosts(params: ScrapePostParam): Promise<JobDetailDto[]>;
 }
 
 export abstract class ScraperFactory {
@@ -44,3 +46,11 @@ export abstract class JobPostRepository {
   abstract get(id: string): Promise<JobPost>;
   abstract getMany(ids: string[]): Promise<JobPost[]>;
 }
+
+// --- Query ---
+
+export type GetVendorResponseDto = {
+  id: string;
+  name: string;
+  url: string;
+};
