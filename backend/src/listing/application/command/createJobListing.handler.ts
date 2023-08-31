@@ -1,8 +1,8 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { JobPostCreatedEvent } from 'src/scraper/entity/jobPost.entity';
-import { JobListingRepository, ScraperService, VendorDto } from './interface';
+import { JobListingRepository, ScraperService, VendorDto } from '../interface';
 import { Inject } from '@nestjs/common';
-import { JobListing } from '../entity/jobListing.entity';
+import { JobListing } from '../../entity/jobListing.entity';
 
 @EventsHandler(JobPostCreatedEvent)
 export class CreateJobListingHandler
