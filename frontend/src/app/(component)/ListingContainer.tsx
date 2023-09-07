@@ -1,16 +1,9 @@
+import styles from './styles/ListingContainer.module.css';
 import Listing from './Listing';
 
 export default function ListingContainer({ items }) {
   return (
-    <div
-      className="listing-list"
-      style={{
-        backgroundColor: 'grey',
-        width: '70vw',
-        height: '70vh',
-        overflowY: 'scroll',
-      }}
-    >
+    <div className={styles['listing-list']}>
       {items.map(item => (
         <Listing key={item.id} item={item} />
       ))}

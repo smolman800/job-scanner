@@ -25,7 +25,3 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
-
-.listing:hover {
-  border: 3px solid black;
-}
