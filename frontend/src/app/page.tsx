@@ -1,6 +1,7 @@
 import ListingContainer from './(component)/ListingContainer';
+import { ListingResponse } from './interface';
 
-function listingGenerator() {
+function listingGenerator(): ListingResponse {
   return {
     items: [
       {

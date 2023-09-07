@@ -1,6 +1,7 @@
 import styles from './styles/Listing.module.css';
+import { Listing } from '../interface';
 
-export default function Listing({ item }) {
+export default function Listing({ item }: { item: Listing }) {
   return (
     <div className={styles['listing']} key={item.id}>
       <div
