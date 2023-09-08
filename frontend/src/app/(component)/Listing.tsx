@@ -12,7 +12,7 @@ export default function Listing({ item }: { item: Listing }) {
             width: '10%',
           }}
         >
-          <img src="/shopee-logo.png" />
+          <img src="/jobsdb-logo.png" />
         </div>
         <div className={styles['listing__titleCompany']}>
           <div className="jobTitle">

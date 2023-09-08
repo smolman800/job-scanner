@@ -8,9 +8,12 @@ import { useEffect, useState } from 'react';
 
 async function getListing(page = 1): Promise<ListingResponse> {
   // TODO: move endpoint to .env and revalidation value
-  const res = await fetch(`http://localhost:4000/listing?page=${page}`, {
-    next: { revalidate: 1000 },
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/listing?page=${page}`,
+    {
+      next: { revalidate: 1000 },
+    },
+  );
   if (!res.ok) {
     throw new Error('Failed to fetch listing');
   }
