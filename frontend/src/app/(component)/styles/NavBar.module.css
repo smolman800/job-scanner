@@ -1,0 +1,14 @@
+.nav-bar {
+  background-color: white;
+  height: 10vh;
+  width: 100vw;
+}
+
+.nav-bar__logo {
+  height: 100%;
+  padding: 1%;
+}
+
+.nav-bar__logo img {
+  height: 100%;
+}
