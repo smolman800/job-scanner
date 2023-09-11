@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 70vw;
-  height: 75vh;
+  height: 85vh;
   margin-left: 15vw;
   margin-top: 2vh;
   color: black;
@@ -11,8 +11,8 @@
 
 .listing-list {
   background-color: grey;
-  width: 70vw;
-  height: 65vh;
+  width: 100%;
+  height: 90%;
   overflow-y: scroll;
 }
 
@@ -20,7 +20,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 5vh;
+  height: 5%;
   margin-top: 3%;
   padding-top: 0.8%;
 }
