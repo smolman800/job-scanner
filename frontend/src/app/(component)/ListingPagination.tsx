@@ -16,7 +16,7 @@ export default function ListingPagination({
 
   return (
     <ReactPaginate
-      previousLabel={'← Previous'}
+      previousLabel={'← Prev'}
       nextLabel={'Next →'}
       breakLabel={'...'}
       breakClassName={'break-me'}
@@ -25,7 +25,7 @@ export default function ListingPagination({
       pageRangeDisplayed={5}
       onPageChange={handlePageClick}
       containerClassName={styles['pagination']}
-      activeClassName={'active'}
+      activeClassName={styles['active']}
     />
   );
 }
