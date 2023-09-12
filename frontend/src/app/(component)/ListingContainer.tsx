@@ -48,6 +48,7 @@ export default function ListingContainer() {
             <Box className={styles['listing-pagination']}>
               <ListingPagination
                 totalItem={listing.meta.totalItems}
+                page={page}
                 setPage={setPage}
               />
             </Box>
