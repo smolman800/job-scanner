@@ -1,59 +1,48 @@
-import styles from './styles/Listing.module.css';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import { Listing } from '../interface';
+import styles from './styles/Listing.module.css';
 
 export default function Listing({ item }: { item: Listing }) {
   return (
     <a href={item.pageUrl} target="_blank">
-      <div className={styles['listing']} key={item.id}>
-        <div className={styles['listing__logo']}>
+      <Box className={styles['listing']} key={item.id}>
+        <Box className={styles['listing__logo']}>
           <img src="/jobsdb-logo.png" />
-        </div>
-        <div className={styles['listing__titleCompany']}>
-          <div className="jobTitle">
+        </Box>
+        <Box className={styles['listing__titleCompany']}>
+          <Box className="jobTitle">
             <u>
-              <span>Job Title</span>
+              <Typography variant="subtitle1">Job Title</Typography>
             </u>
-            <br />
-            <b>
-              <span className={styles['listing__titleCompany--jobTitle']}>
-                {item.jobTitle}
-              </span>
-            </b>
-          </div>
-          <div className={styles['listing__titleCompany--company']}>
+            <Typography variant="h6">{item.jobTitle}</Typography>
+          </Box>
+          <Box className={styles['listing__titleCompany--company']}>
             <u>
-              <span>Company</span>
+              <Typography variant="body2">Company</Typography>
             </u>
-            <br />
-            <b>
-              <span>{item.company}</span>
-            </b>
-          </div>
-        </div>
-        <div className={styles['listing__salary']}>
-          <div className={styles['listing__salary--salary']}>
+            <Typography variant="subtitle2">{item.company}</Typography>
+          </Box>
+        </Box>
+        <Box className={styles['listing__salary']}>
+          <Box className={styles['listing__salary--salary']}>
             <u>
-              <span>Salary</span>
+              <Typography variant="body2">Salary</Typography>
             </u>
-            <br />
-            <b>
-              <span>
-                {item.salaryMin} - {item.salaryMax} {item.currency}
-              </span>
-            </b>
-          </div>
-        </div>
-        <div className={styles['listing__dateIndustry']}>
-          <div className={styles['listing__dateIndustry--date']}>
-            <span>{item.postDate}</span>
-          </div>
-          <div className={styles['listing__dateIndustry--industry']}>
-            <b>
-              <span>{item.industry}</span>
-            </b>
-          </div>
-        </div>
-      </div>
+            <Typography variant="subtitle2">
+              {item.salaryMin} - {item.salaryMax} {item.currency}
+            </Typography>
+          </Box>
+        </Box>
+        <Box className={styles['listing__dateIndustry']}>
+          <Box className={styles['listing__dateIndustry--date']}>
+            <Typography variant="body2">{item.postDate}</Typography>
+          </Box>
+          <Box className={styles['listing__dateIndustry--industry']}>
+            <Typography variant="subtitle2">{item.industry}</Typography>
+          </Box>
+        </Box>
+      </Box>
     </a>
   );
 }
