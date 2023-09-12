@@ -1,7 +1,7 @@
-import styles from './styles/NavBar.module.css';
 import AppBar from '@mui/material/AppBar';
-import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import styles from './styles/NavBar.module.css';
 
 export default function NavBar() {
   return (
