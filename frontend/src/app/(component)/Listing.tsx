@@ -5,13 +5,7 @@ export default function Listing({ item }: { item: Listing }) {
   return (
     <a href={item.pageUrl} target="_blank">
       <div className={styles['listing']} key={item.id}>
-        <div
-          className={styles['listing__logo']}
-          style={{
-            height: '100%',
-            width: '10%',
-          }}
-        >
+        <div className={styles['listing__logo']}>
           <img src="/jobsdb-logo.png" />
         </div>
         <div className={styles['listing__titleCompany']}>

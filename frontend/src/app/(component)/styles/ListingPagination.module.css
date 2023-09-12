@@ -2,31 +2,37 @@
 .pagination {
   display: flex;
   justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  height: 100%;
+  border: 2px solid black;
 }
 
 /* Individual page number link */
 .pagination a {
-  padding: 8px 16px;
-  border: 1px solid #ddd;
+  padding: 0 1rem;
   color: black;
   text-decoration: none;
+  
+}
+
+.pagination li {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  border-radius: 8px;
 }
 
 /* Current page */
 .pagination .active a {
-  background-color: #007bff;
+  background-color: grey;
   color: white;
-  border: 1px solid #007bff;
-}
-
-/* Previous and Next buttons */
-.pagination a.previous,
-.pagination a.next {
-  font-weight: bold;
+  border: 1px solid grey;
 }
 
 /* Hover effect */
-.pagination a:hover:not(.active) {
+.pagination li:hover  {
   background-color: #ddd;
 }
 
