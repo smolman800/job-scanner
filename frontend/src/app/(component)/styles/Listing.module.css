@@ -1,10 +1,15 @@
 .listing {
 	background-color: white;
-	margin-bottom: 1%;
+	margin-bottom: 0.5%;
+
 	width: 100%;
+
 	height: 25%;
+	min-height: 125px;
+
 	border-radius: 8px;
 	transition: border 0.3s ease;
+
 	display: flex;
 }
 
@@ -13,8 +18,9 @@
 }
 
 .listing__logo {
-	height: 100%;
+	min-height: 100%;
 	width: 10%;
+	min-width: 90px;
 }
 
 .listing__logo img {
@@ -24,16 +30,17 @@
 }
 
 .listing__titleCompany {
-	height: 100%;
-	width: 50%;
-	padding: 1%;
+	width: 40%;
+	min-width: 320px;
+
+	padding: 0.3%;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 }
 
 .listing__titleCompany--jobTitle {
-	font-size: 1.2vw;
+	font-size: 1.2rem;
 }
 
 .listing__titleCompany--company {
@@ -41,9 +48,10 @@
 }
 
 .listing__salary {
-	height: 100%;
-	width: 20%;
-	padding: 1%;
+	width: 10%;
+	min-width: 55px;
+	padding-bottom: 0.3%;
+	padding-left: 1%;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -54,12 +62,14 @@
 }
 
 .listing__dateIndustry {
-	height: 100%;
-	width: 20%;
-	padding: 1%;
-	overflow: hidden;
+	width: 50%;
+	min-width: 280px;
+	padding-bottom: 0.3%;
+	padding-left: 1%;
+	padding-right: 1%;
 	display: flex;
 	flex-direction: column;
+	margin-left: auto;
 }
 
 .listing__dateIndustry--date {

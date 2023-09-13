@@ -6,6 +6,8 @@
   background-color: white;
   border-radius: 8px;
   height: 100%;
+  min-height: 25px;
+  max-height: 50px;
   border: 2px solid black;
 }
 
@@ -14,7 +16,7 @@
   padding: 0 1rem;
   color: black;
   text-decoration: none;
-  font-size: 1vw; 
+  font-size: 1rem; 
 }
 
 .pagination li {
