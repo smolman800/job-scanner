@@ -1,31 +1,26 @@
 'use client';
-import ReactPaginate from 'react-paginate';
-import styles from './styles/ListingPagination.module.css';
+// TODO: uninstall ReactPaginate
+import Pagination from '@mui/material/Pagination';
 
 export default function ListingPagination({
   totalItem,
+  page,
   setPage,
 }: {
   totalItem: number;
+  page: number;
   setPage: (page: number) => void;
 }) {
-  function handlePageClick(e: { selected: number }) {
-    const selectedPage = e.selected + 1;
-    setPage(selectedPage);
-  }
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
 
   return (
-    <ReactPaginate
-      previousLabel={'← Prev'}
-      nextLabel={'Next →'}
-      breakLabel={'...'}
-      breakClassName={'break-me'}
-      pageCount={Math.ceil(totalItem / 9)}
-      marginPagesDisplayed={2}
-      pageRangeDisplayed={5}
-      onPageChange={handlePageClick}
-      containerClassName={styles['pagination']}
-      activeClassName={styles['active']}
+    <Pagination
+      count={Math.ceil(totalItem / 9)}
+      page={page}
+      onChange={handleChange}
+      color="secondary"
     />
   );
 }

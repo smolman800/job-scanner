@@ -3,8 +3,8 @@
   flex-direction: column;
   width: 70vw;
   height: 85vh;
-  margin-left: 15vw;
   margin-top: 2vh;
+  /* TODO: should move this to global theme */
   color: black;
   cursor: pointer;
 }
@@ -24,4 +24,11 @@
   height: 10%;
   margin-top: 3%;
   padding-top: 0.8%;
+}
+
+.loading-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 }
