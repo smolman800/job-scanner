@@ -7,6 +7,10 @@ body {
   background-color: grey;
 }
 
+span {
+  font-size: 1rem;
+}
+
 ::-webkit-scrollbar {
   width: 1vw;
 }
