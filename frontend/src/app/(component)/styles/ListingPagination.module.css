@@ -44,3 +44,15 @@
   color: #ccc;
   border: 1px solid #ccc;
 }
+
+@media (max-width: 400px) {
+  .pagination a {
+    font-size: 1.8rem;
+  }
+
+  .pagination {
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+}

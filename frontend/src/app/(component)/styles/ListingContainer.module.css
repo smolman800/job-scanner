@@ -36,3 +36,17 @@
   margin-bottom: 3%;
   padding-top: 0.8%;
 }
+
+@media (max-width: 400px) {
+  .listing-container {
+    width: 100%;
+    max-width: none;
+    max-height: none;
+  }
+
+  .listing-pagination {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+  }
+}

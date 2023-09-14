@@ -80,3 +80,50 @@
 	margin-top: auto;
 	margin-left: auto;
 }
+
+@media (max-width: 400px) {
+  .listing {
+		margin-bottom: 0;
+		border-bottom: 1px solid black;
+		height: 50%;
+		min-height: 150px;
+  }
+
+	.listing__logo {
+		width: 20%;
+		min-width: 180px;
+	}
+
+	.listing__dateIndustry {
+		display: none;
+		width: 0;
+	}
+
+	.listing__salary {
+		margin-left: auto;
+	}
+
+	.jobTitle {
+		display: flex
+	}
+
+	.listing__titleCompany--jobTitlePlaceholder {
+		display: none;
+		width: 0;
+		height: 0;
+	}
+
+	.listing__titleCompany--companyPlaceholder {
+		display: none;
+		width: 0;
+		height: 0;
+	}
+
+	.listing__titleCompany--jobTitle {
+		font-size: 1.6rem;
+	}
+
+	.listing__salary {
+		width: 30%;
+	}
+}

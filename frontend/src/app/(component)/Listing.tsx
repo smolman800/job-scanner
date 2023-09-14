@@ -9,9 +9,13 @@ export default function Listing({ item }: { item: Listing }) {
           <img src="/jobsdb-logo.png" />
         </div>
         <div className={styles['listing__titleCompany']}>
-          <div className="jobTitle">
+          <div className={styles['jobTitle']}>
             <u>
-              <span>Job Title</span>
+              <span
+                className={styles['listing__titleCompany--jobTitlePlaceholder']}
+              >
+                Job Title
+              </span>
             </u>
             <br />
             <b>
@@ -22,7 +26,11 @@ export default function Listing({ item }: { item: Listing }) {
           </div>
           <div className={styles['listing__titleCompany--company']}>
             <u>
-              <span>Company</span>
+              <span
+                className={styles['listing__titleCompany--companyPlaceholder']}
+              >
+                Company
+              </span>
             </u>
             <br />
             <b>

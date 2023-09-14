@@ -42,7 +42,7 @@ export default function ListingContainer() {
           </div>
           <div className={styles['listing-pagination']}>
             <ListingPagination
-              totalItem={listing.meta.totalItems}
+              totalPages={listing.meta.totalPages}
               setPage={setPage}
             />
           </div>

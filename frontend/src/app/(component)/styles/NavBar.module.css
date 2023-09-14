@@ -22,3 +22,21 @@
   min-width: 160px;
   max-width: 180px;
 }
+
+@media (max-width: 400px) {
+  .nav-bar {
+    height: 20vh;
+    min-width: none;
+    max-height: none;
+  }
+
+  .nav-bar__logo {
+    padding: 0.5%;
+  }
+
+  .nav-bar__logo img {
+    width: 40%;
+    min-width: none;
+    max-width: none;
+  }
+}
