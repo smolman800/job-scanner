@@ -1,0 +1,36 @@
+name: Pull Request Workflow
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-backend:
+    run-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 18
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Run tests
+        run: |
+          cd backend
+          npm test
+
+      - name: Build Docker image
+        run: |
+          cd backend
+          docker build -t backend .
