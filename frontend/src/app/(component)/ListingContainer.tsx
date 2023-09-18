@@ -5,6 +5,7 @@ import Listing from './Listing';
 import ListingPagination from './ListingPagination';
 import { ListingResponse } from '../interface';
 import { useEffect, useState } from 'react';
+import Loading from './Loading';
 
 async function getListing(page = 1): Promise<ListingResponse> {
   // TODO: move endpoint to .env and revalidation value
@@ -31,7 +32,7 @@ export default function ListingContainer() {
   return (
     <>
       {listing === null ? (
-        <div>Loading...</div>
+        <Loading />
       ) : (
         <div className={styles['listing-container']}>
           <div className={styles['listing-list']}>
@@ -41,7 +42,7 @@ export default function ListingContainer() {
           </div>
           <div className={styles['listing-pagination']}>
             <ListingPagination
-              totalItem={listing.meta.totalItems}
+              totalPages={listing.meta.totalPages}
               setPage={setPage}
             />
           </div>

@@ -3,10 +3,10 @@ import ReactPaginate from 'react-paginate';
 import styles from './styles/ListingPagination.module.css';
 
 export default function ListingPagination({
-  totalItem,
+  totalPages,
   setPage,
 }: {
-  totalItem: number;
+  totalPages: number;
   setPage: (page: number) => void;
 }) {
   function handlePageClick(e: { selected: number }) {
@@ -20,7 +20,7 @@ export default function ListingPagination({
       nextLabel={'Next →'}
       breakLabel={'...'}
       breakClassName={'break-me'}
-      pageCount={Math.ceil(totalItem / 9)}
+      pageCount={totalPages}
       marginPagesDisplayed={2}
       pageRangeDisplayed={5}
       onPageChange={handlePageClick}

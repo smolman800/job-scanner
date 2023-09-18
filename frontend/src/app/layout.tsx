@@ -20,7 +20,18 @@ export default function RootLayout({
       <body className={inter.className}>
         <div
           className="main-container"
-          style={{ backgroundColor: 'grey', height: '100vh', width: '100vw' }}
+          style={{
+            backgroundColor: 'grey',
+
+            height: '100%',
+
+            minWidth: '944px',
+            width: '100%',
+
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
         >
           <NavBar />
           {children}
