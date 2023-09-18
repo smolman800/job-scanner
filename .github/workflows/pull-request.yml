@@ -20,3 +20,15 @@ jobs:
       - name: Run Backend Tests
         run: |
           docker run --rm backend-image npm run test
+
+  build-and-test-frontend:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Build Frontend Docker Image
+        run: |
+          cd frontend
+          docker build -t frontend-image .
