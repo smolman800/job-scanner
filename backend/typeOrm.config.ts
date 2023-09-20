@@ -18,4 +18,7 @@ export default new DataSource({
   entities: [VendorOrmEntity, JobPostOrmEntity, JobListingOrmEntity],
   migrations: ['migration/*.ts'],
   logging: true,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });

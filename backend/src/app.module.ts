@@ -9,7 +9,11 @@ import { JobPostOrmEntity } from './scraper/repository/jobPost.repository';
 import { CqrsModule } from '@nestjs/cqrs';
 import { ListingModule } from './listing/listing.module';
 import { JobListingOrmEntity } from './listing/repository/jobListing.repository';
+import { config } from 'dotenv';
 
+config();
+
+// TODO: fix rejectUnauthorized: false
 @Module({
   imports: [
     CqrsModule.forRoot(),
@@ -25,6 +29,9 @@ import { JobListingOrmEntity } from './listing/repository/jobListing.repository'
         database: config.get('DATABASE_NAME'),
         entities: [VendorOrmEntity, JobPostOrmEntity, JobListingOrmEntity],
         synchronize: false,
+        ssl: {
+          rejectUnauthorized: false,
+        },
       }),
     }),
     ScraperModule,
@@ -34,4 +41,6 @@ import { JobListingOrmEntity } from './listing/repository/jobListing.repository'
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private readonly configService: ConfigService) {}
+}

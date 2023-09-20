@@ -43,7 +43,7 @@ export class ScrapeJobHandler {
     const jobDetails: JobDetailDto[] = await scraper.scrapePosts({
       from: null,
       to: null,
-      postCount: 10,
+      postCount: 99,
     });
 
     const jobPostEntities = jobDetails.map((jobDetail) => {
