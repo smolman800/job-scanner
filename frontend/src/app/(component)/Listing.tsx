@@ -6,7 +6,11 @@ export default function Listing({ item }: { item: Listing }) {
     <a href={item.pageUrl} target="_blank">
       <div className={styles['listing']} key={item.id}>
         <div className={styles['listing__logo']}>
-          <img src="/jobsdb-logo.png" />
+          {item.vendorId == 'jobsdb' ? (
+            <img src="/jobsdb-logo.png" />
+          ) : (
+            <img src="/blognone-logo.png" />
+          )}
         </div>
         <div className={styles['listing__titleCompany']}>
           <div className={styles['jobTitle']}>
