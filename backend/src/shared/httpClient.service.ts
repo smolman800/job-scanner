@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 
 type Config = {
-  method: string;
   headers: object;
 };
 

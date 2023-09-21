@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 
-import { JobDetailsConfig, ListingConfig } from '../../scraper/interface';
 import { HttpClient } from '../../shared/httpClient.service';
 import {
   JobDescription,
@@ -16,15 +15,14 @@ import {
   ScrapePostParam,
   Scraper,
 } from '../application/interface';
+import { JOB_DETAILS_CONFIG, JOB_LISTING_CONFIG } from './config';
 
 // TODO: offload scraping to background worker thread
 @Injectable()
 export class JobsdbScraperService implements Scraper {
-  constructor(
-    private readonly httpClient: HttpClient,
-    private readonly jobListingsConfig: ListingConfig,
-    private readonly jobDetailsConfig: JobDetailsConfig,
-  ) {}
+  private readonly jobListingsConfig = JOB_LISTING_CONFIG;
+  private readonly jobDetailsConfig = JOB_DETAILS_CONFIG;
+  constructor(private readonly httpClient: HttpClient) {}
 
   async scrapePosts({
     from = new Date(),

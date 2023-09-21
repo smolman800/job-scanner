@@ -13,10 +13,10 @@ import {
   ScraperFactory,
   VendorRepository,
 } from './application/interface';
+import { GetVendorHandler } from './application/query/getVendor.query';
+import { BlognoneScraperService } from './blognone/blognone.service';
 import { JobPost } from './entity/jobPost.entity';
 import { Vendor } from './entity/vendor.entity';
-import { JobDetailsConfig, ListingConfig } from './interface';
-import { JOB_DETAILS_CONFIG, JOB_LISTING_CONFIG } from './jobsdb/config';
 import { JobsdbScraperService } from './jobsdb/jobsdb.service';
 import {
   JobPostOrmEntity,
@@ -27,7 +27,6 @@ import {
   VendorTypeOrmRepository,
 } from './repository/vendor.repository';
 import { ScraperController } from './scraper.controller';
-import { GetVendorHandler } from './application/query/getVendor.query';
 
 const ENTITY = [
   {
@@ -53,6 +52,7 @@ const REPOSITORY = [
 
 const SERVICE = [
   JobsdbScraperService,
+  BlognoneScraperService,
   {
     provide: ScraperFactory,
     useClass: ScraperFactoryImpl,
@@ -65,20 +65,9 @@ const SERVICE = [
 
 const HANDLER = [ScrapeJobHandler, GetVendorHandler];
 
-const CONFIG = [
-  {
-    provide: ListingConfig,
-    useValue: JOB_LISTING_CONFIG,
-  },
-  {
-    provide: JobDetailsConfig,
-    useValue: JOB_DETAILS_CONFIG,
-  },
-];
-
 @Module({
   imports: [TypeOrmModule.forFeature([VendorOrmEntity, JobPostOrmEntity])],
   controllers: [ScraperController],
-  providers: [...ENTITY, ...REPOSITORY, ...SERVICE, ...CONFIG, ...HANDLER],
+  providers: [...ENTITY, ...REPOSITORY, ...SERVICE, ...HANDLER],
 })
 export class ScraperModule {}

@@ -1,23 +1,29 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { CommandHandler, EventPublisher } from '@nestjs/cqrs';
+import { BlognoneScraperService } from '../..//blognone/blognone.service';
 import { JobPost } from '../../entity/jobPost.entity';
+import { Vendor, VendorId } from '../../entity/vendor.entity';
+import { JobsdbScraperService } from '../../jobsdb/jobsdb.service';
 import {
-  ScraperFactory,
   JobDetailDto,
   JobPostRepository,
   Scraper,
+  ScraperFactory,
 } from '../interface';
-import { JobsdbScraperService } from '../../jobsdb/jobsdb.service';
-import { Vendor, VendorId } from '../../entity/vendor.entity';
-import { CommandHandler, EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class ScraperFactoryImpl implements ScraperFactory {
-  constructor(private readonly jobsdbScraper: JobsdbScraperService) {}
+  constructor(
+    private readonly jobsdbScraper: JobsdbScraperService,
+    private readonly blognoneScraper: BlognoneScraperService,
+  ) {}
 
   create(vendor: Vendor): Scraper {
     switch (vendor.id) {
       case VendorId.JOBSDB:
         return this.jobsdbScraper;
+      case VendorId.BLOGNONE:
+        return this.blognoneScraper;
       default:
         throw new Error('Invalid vendorId');
     }
