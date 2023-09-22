@@ -22,7 +22,7 @@ export default function ListingPagination({
       breakClassName={'break-me'}
       pageCount={totalPages}
       marginPagesDisplayed={2}
-      pageRangeDisplayed={5}
+      pageRangeDisplayed={3}
       onPageChange={handlePageClick}
       containerClassName={styles['pagination']}
       activeClassName={styles['active']}
