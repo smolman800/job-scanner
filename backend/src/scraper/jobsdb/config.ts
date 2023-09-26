@@ -181,7 +181,7 @@ const JOB_LISTING_BODY = (pageNo: number) => {
     `,
     variables: {
       keyword: '',
-      jobFunctions: [132, 134, 311, 142, 146],
+      jobFunctions: [132, 134, 311, 142, 146, 138, 131, 304],
       locations: [],
       salaryType: 1,
       jobTypes: [],

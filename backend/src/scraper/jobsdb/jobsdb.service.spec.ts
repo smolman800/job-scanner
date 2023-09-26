@@ -7,11 +7,7 @@ describe('JobsdbScraperService', () => {
   });
 
   test('scrapePosts should return 1 job post when getListings returns 2 posts', async () => {
-    const scraper = new JobsdbScraperService(
-      new MockedHttpClient(),
-      {} as any,
-      {} as any,
-    );
+    const scraper = new JobsdbScraperService(new MockedHttpClient());
     scraper['getListings'] = jest.fn().mockResolvedValue({
       data: {
         jobs: {
@@ -107,11 +103,7 @@ describe('JobsdbScraperService', () => {
   });
 
   test('scrapePosts should return maximum post when getListings returns lesser than requested posts', async () => {
-    const scraper = new JobsdbScraperService(
-      new MockedHttpClient(),
-      {} as any,
-      {} as any,
-    );
+    const scraper = new JobsdbScraperService(new MockedHttpClient());
     scraper['getListings'] = jest
       .fn()
       .mockResolvedValueOnce({

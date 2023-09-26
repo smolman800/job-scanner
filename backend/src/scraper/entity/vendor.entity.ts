@@ -8,6 +8,7 @@ export type VendorProps = {
 
 export enum VendorId {
   JOBSDB = 'jobsdb',
+  BLOGNONE = 'blognone',
 }
 
 export class Vendor extends AggregateRoot {
