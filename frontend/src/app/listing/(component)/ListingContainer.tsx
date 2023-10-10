@@ -1,6 +1,6 @@
 import { ListingResponse } from '../../interface';
 import Listing from './Listing';
-import ListingPagination from './ListingPagination';
+import Pagination from '../../(component)/Pagination';
 import Loading from '../../(component)/Loading';
 import styles from './styles/ListingContainer.module.css';
 
@@ -32,9 +32,10 @@ export default async function ListingContainer({ pageNo }: { pageNo: number }) {
             ))}
           </div>
           <div className={styles['listing-pagination']}>
-            <ListingPagination
+            <Pagination
               currentPage={pageNo}
               totalPages={listing.meta.totalPages}
+              hrefBuilder={(pageNumber: number) => `/listing/${pageNumber}`}
             />
           </div>
         </div>

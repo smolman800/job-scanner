@@ -1,18 +1,18 @@
 import Link from 'next/link';
-import styles from './styles/ListingPagination.module.css';
+import styles from './styles/Pagination.module.css';
 
-export default function ListingPagination({
+export default function Pagination({
   currentPage,
   totalPages,
+  hrefBuilder,
   pageRangeDisplayed = 5,
   marginPagesDisplayed = 2,
-  hrefBuilder = (pageNumber: number) => `/listing/${pageNumber}`,
 }: {
   currentPage: number;
   totalPages: number;
+  hrefBuilder: (pageNumber: number) => string;
   pageRangeDisplayed?: number;
   marginPagesDisplayed?: number;
-  hrefBuilder?: (pageNumber: number) => string;
 }) {
   const getPageArray = () => {
     const range = [];
@@ -46,11 +46,23 @@ export default function ListingPagination({
       {getPageArray().map((pageNumber, index) => {
         if (pageNumber === null) return <span key={index}>...</span>;
 
-        return (
-          <Link key={pageNumber} href={hrefBuilder(pageNumber)}>
-            {pageNumber}
-          </Link>
-        );
+        if (pageNumber === currentPage) {
+          return (
+            <Link
+              key={pageNumber}
+              href={hrefBuilder(pageNumber)}
+              className={pageNumber === currentPage ? styles.active : ''}
+            >
+              {pageNumber}
+            </Link>
+          );
+        } else {
+          return (
+            <Link key={pageNumber} href={hrefBuilder(pageNumber)}>
+              {pageNumber}
+            </Link>
+          );
+        }
       })}
 
       {currentPage < totalPages && (

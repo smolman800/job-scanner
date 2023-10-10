@@ -27,10 +27,11 @@
 }
 
 /* Current page */
-.pagination .active a {
+.pagination a.active {
   background-color: grey;
   color: white;
   border: 1px solid grey;
+  pointer-events: none;
 }
 
 /* Hover effect */
