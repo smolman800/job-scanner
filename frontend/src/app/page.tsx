@@ -1,9 +1,5 @@
-import ListingContainer from './(component)/ListingContainer';
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <>
-      <ListingContainer />
-    </>
-  );
+  redirect('/listing/1');
 }

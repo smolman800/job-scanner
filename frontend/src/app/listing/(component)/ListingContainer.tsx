@@ -1,14 +1,10 @@
-'use client';
-
-import styles from './styles/ListingContainer.module.css';
+import { ListingResponse } from '../../interface';
 import Listing from './Listing';
 import ListingPagination from './ListingPagination';
-import { ListingResponse } from '../interface';
-import { useEffect, useState } from 'react';
-import Loading from './Loading';
+import Loading from '../../(component)/Loading';
+import styles from './styles/ListingContainer.module.css';
 
 async function getListing(page = 1): Promise<ListingResponse> {
-  // TODO: move endpoint to .env and revalidation value
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/listing?page=${page}`,
     {
@@ -21,13 +17,8 @@ async function getListing(page = 1): Promise<ListingResponse> {
   return res.json();
 }
 
-export default function ListingContainer() {
-  const [listing, setListing] = useState<ListingResponse | null>(null);
-  const [page, setPage] = useState(1);
-
-  useEffect(() => {
-    getListing(page).then(data => setListing(data));
-  }, [page]);
+export default async function ListingContainer({ pageNo }: { pageNo: number }) {
+  const listing = await getListing(pageNo);
 
   return (
     <>
@@ -42,8 +33,8 @@ export default function ListingContainer() {
           </div>
           <div className={styles['listing-pagination']}>
             <ListingPagination
+              currentPage={pageNo}
               totalPages={listing.meta.totalPages}
-              setPage={setPage}
             />
           </div>
         </div>
