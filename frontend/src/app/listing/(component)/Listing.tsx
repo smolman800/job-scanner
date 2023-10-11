@@ -1,5 +1,5 @@
 import styles from './styles/Listing.module.css';
-import { Listing } from '../interface';
+import { Listing } from '../../interface';
 
 export default function Listing({ item }: { item: Listing }) {
   return (
