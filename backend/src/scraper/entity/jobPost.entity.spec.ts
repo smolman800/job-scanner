@@ -133,9 +133,20 @@ describe('JobPost', () => {
     );
   });
 
+  test('create should store date in UTC timezone when parsing 2023-11-03T11:50:01.281682+07:00', () => {
+    const props = createJobPostProps({
+      postDate: '2023-11-03T11:50:01.281682+07:00',
+    });
+    const jobPost = JobPost.create(props, props.id);
+    expect(jobPost['props']['postDate']).toBe('2023-11-03T04:50:01.281Z');
+  });
+
   test('serialize should return props', () => {
     const props = createJobPostProps();
     const jobPost = JobPost.hydrate(props);
-    expect(jobPost.serialize()).toEqual(props);
+    expect(jobPost.serialize()).toEqual({
+      ...props,
+      postDate: '2023-08-27T17:58:07.000Z',
+    });
   });
 });

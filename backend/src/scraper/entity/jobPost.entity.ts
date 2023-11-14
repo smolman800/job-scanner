@@ -29,7 +29,11 @@ export class JobPost extends AggregateRoot {
     this.validateJobTitle(props.jobTitle);
     this.validateCurrency(props.currency, props.salaryMin, props.salaryMax);
     this.validatePostDate(props.postDate);
-    this.props = props;
+    this.props = {
+      ...props,
+      // TODO: formatDate could be reusable helping function
+      postDate: this.formatDate(props.postDate),
+    };
   }
 
   static create(props: Omit<JobPostProps, 'id'>, id: string): JobPost {
@@ -89,6 +93,10 @@ export class JobPost extends AggregateRoot {
     if (isNaN(date.getTime())) {
       throw new Error('postDate must be a valid date');
     }
+  }
+
+  private formatDate(postDate: string): string {
+    return new Date(postDate).toISOString();
   }
 
   serialize(): JobPostProps {
